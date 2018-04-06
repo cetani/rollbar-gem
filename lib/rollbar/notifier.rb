@@ -236,6 +236,8 @@ module Rollbar
         begin
           process_item(item)
         rescue => e
+          return if payload['data'][:internal]
+
           report_internal_error(e)
 
           raise
